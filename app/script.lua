@@ -1,1 +1,1 @@
-log "Hello World!"
+warn "This script is empty!"

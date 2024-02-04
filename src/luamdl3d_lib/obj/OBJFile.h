@@ -1,6 +1,7 @@
 #pragma once
 
 #include <DirectXMath.h>
+#include <luamdl3d_lib/obj/DirectXMath_Stream.h>
 
 #include <list>
 #include <string>
@@ -43,6 +44,11 @@ namespace luamdl3d
         std::string GroupName;
 
         /*!
+         * @brief Name of the material for the group
+        */
+        std::string MaterialName;
+
+        /*!
          * @brief Faces in a group
         */
         std::vector<OBJFace3> Faces;
@@ -57,6 +63,11 @@ namespace luamdl3d
          * @brief Labels the object
         */
         std::string ObjectName;
+
+        /*!
+         * @brief Name of material for the object
+        */
+        std::string MaterialName;
 
         /*!
          * @brief Verticies of the object
@@ -93,6 +104,11 @@ namespace luamdl3d
             "(c) Copyright 2024 Ludwig Fuechsl";
 
         /*!
+         * @brief Reference to the MTL File
+        */
+        std::string MTLFileName;
+
+        /*!
          * @brief Encapsulated objects
         */
         std::list<OBJObject> Objects;
@@ -100,9 +116,6 @@ namespace luamdl3d
     };
 }
 
-std::ostream& operator<<(std::ostream& out, const luamdl3d::OBJVector2F& v2f);
-std::ostream& operator<<(std::ostream& out, const luamdl3d::OBJVector3F& v3f);
-std::ostream& operator<<(std::ostream& out, const luamdl3d::OBJVector4F& v4f);
 std::ostream& operator<<(std::ostream& out, const luamdl3d::OBJPoint& pt);
 std::ostream& operator<<(std::ostream& out, const luamdl3d::OBJFace3& face3);
 std::ostream& operator<<(std::ostream& out, const luamdl3d::OBJGroup& group);

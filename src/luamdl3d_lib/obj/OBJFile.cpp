@@ -1,26 +1,5 @@
 #include "OBJFile.h"
 
-std::ostream& operator<<(std::ostream& out, const luamdl3d::OBJVector2F& v2f)
-{
-    out << std::fixed << std::setprecision(5);
-    out << v2f.x << " " << v2f.y;
-    return out;
-}
-
-std::ostream& operator<<(std::ostream& out, const luamdl3d::OBJVector3F& v3f)
-{
-    out << std::fixed << std::setprecision(5);
-    out << v3f.x << " " << v3f.y << " " << v3f.z;
-    return out;
-}
-
-std::ostream& operator<<(std::ostream& out, const luamdl3d::OBJVector4F& v4f)
-{
-    out << std::fixed << std::setprecision(5);
-    out << v4f.x << " " << v4f.y << " " << v4f.z << " " << v4f.w;
-    return out;
-}
-
 std::ostream& operator<<(std::ostream& out, const luamdl3d::OBJPoint& pt)
 {
     out << (pt.VertexIndex + 1) << "/" << (pt.TexCordIndex + 1)  << "/" << (pt.NormalIndex + 1);
@@ -40,6 +19,11 @@ std::ostream& operator<<(std::ostream& out, const luamdl3d::OBJGroup& group)
         out << "g " << group.GroupName << std::endl;
     }
 
+    if (!group.MaterialName.empty())
+    {
+        out << "usemtl " << group.MaterialName << std::endl;
+    }
+
     for (const auto& face : group.Faces)
     {
         out << face << std::endl;
@@ -53,6 +37,11 @@ std::ostream& operator<<(std::ostream& out, const luamdl3d::OBJObject& object)
     if (!object.ObjectName.empty())
     {
         out << "o " << object.ObjectName << std::endl;
+    }
+
+    if (!object.MaterialName.empty())
+    {
+        out << "usemtl " << object.MaterialName << std::endl;
     }
 
     for (const auto& vertex : object.Verticies)
@@ -92,6 +81,11 @@ std::ostream& operator<<(std::ostream& out, const luamdl3d::OBJFile& file)
     while (std::getline(ss, line))
     {
         out << "# " << line << std::endl;
+    }
+
+    if (!file.MTLFileName.empty())
+    {
+        out << "mtllib " << file.MTLFileName << std::endl;
     }
 
     for (const auto& object : file.Objects)
